@@ -1,0 +1,109 @@
+// .p-menu__content{
+//     position: absolute;
+// }
+.p-globalNav{
+    position: absolute;
+    // position: relative;
+    top: 0;
+    right: 0;
+    background-color: #f89b9e;
+    background-image: linear-gradient(315deg, #f89b9e 0%, #c9d9ff 80%);
+    // background-color: #ffd9de;
+    // background-image: linear-gradient(315deg, #ffd9de 0%, #e99ba6 74%);
+    // background-color: #d9e4f5;
+    // background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+    // background-image: linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%);
+    pointer-events: none;
+    width: 300px;
+    height: 100vh;
+    transition-timing-function: cubic-bezier(.215,.61,.355,1);
+    transition-duration: .4s;
+    transition-property: all;
+    -webkit-transform: translateX(300px);
+    transform: translateX(300px);
+    padding-top: 150px;
+    z-index: 2;
+
+
+     &.is-open{
+        pointer-events: all;
+        transform: translateX(0);
+        // z-index: 1002;
+        // pointer-events: none;
+        // position: relative;
+     }
+}
+.p-globalNav__links{
+    position: relative;
+    border-bottom: 1px solid #fff;
+    // border-top: 1px solid #eee;
+    // overflow: hidden;
+    padding: 10px;
+    // z-index: 1002;
+    
+
+
+    &.is-login{
+        padding-top: 15px;
+        border-bottom: 1px solid #fff;
+        display: flex;
+        // justify-content: space-between;
+        justify-content: center;
+        padding: 0 20px 20px;
+        // z-index: 1002;
+
+    }
+}
+.p-globalNav__link--button{
+    text-align: center;
+    width: calc(50% - 5px);
+    border-radius: 3px;
+    position: relative;
+    // z-index: 1002;
+   
+
+    &.-login{
+        border: 1px solid #223773;
+        background: #F2F2F2;
+        padding: 12px 0;
+
+        & > a{
+            color: #223773;
+            font-weight: 400;
+            position: relative;
+        } 
+    }
+
+    &.-regi{
+        background: #223773;
+        padding: 12px 0;
+
+        & > a{
+            color: #fff;
+            font-weight: 400;
+            position: relative;
+        }
+        
+    }
+}
+.p-globalNav__link{
+    display: block;
+    font-size: 14px;
+    // font-weight: 700;
+    line-height: 1;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1002;
+
+    & > a{
+        // color: #fff;
+        color: #394159;
+        position: relative;
+        // color: rgb(163, 162, 162);
+        // color: #D9B4B4;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

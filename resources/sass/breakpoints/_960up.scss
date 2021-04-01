@@ -1,0 +1,27 @@
+.p-searchBox{
+    max-width: 279px;
+    justify-content: flex-start;
+    margin-left: 30px;
+}
+.c-listContainer{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+.c-container__list{
+    width: 65%;
+}
+.p-actionNav{
+    display: block;
+}
+
+.p-hero__title{
+    font-size: $font-size_30;
+}
+.p-hero__imgContainer{
+    height: 700px;
+}
+.p-hero__description{
+    font-size: $font-size_16;
+}

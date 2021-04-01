@@ -1,0 +1,48 @@
+.p-actionNav{
+    display: none;
+    position: absolute;
+    top: 21px;
+    right: 78px;
+    // pointer-events: none;
+    // font-family: 'M PLUS 1p', sans-serif;
+    // font-weight: 400;
+}
+.p-actionNav__links{
+    display: flex;
+}
+.p-actionNav__link{
+    flex-direction: row;
+
+    & > a{
+        color: #333;
+    } 
+}
+.p-actionNav__link--button{
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: $font-size_12;
+
+
+
+    &.-login{
+        border: 1px solid #223773;
+        background: #F2F2F2;
+        padding: 8px 0;
+        margin-right: 10px;
+
+
+        & > a{
+            color: #223773;
+        } 
+    }
+
+    &.-regi{
+        background: #223773;
+        padding: 8px 0;
+
+        & > a{
+            color: #fff;
+        } 
+    }
+}

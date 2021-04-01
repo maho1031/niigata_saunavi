@@ -1,0 +1,131 @@
+.p-form{
+    width: 100%;
+}
+.p-form__input{
+        display: block;
+        width: 100%;
+        // height: 60px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        // background-color: rgba(187,187,187,0.5);
+        position: relative;
+        border: 3px solid #eee;
+        border-radius: 8px;
+        font-size: 16px;
+        // outline: none;
+        padding: 14px;
+
+        &::placeholder {
+            color: #eee;
+            font-size: $font_size_14;
+        }
+        &.is-error{
+            border: 1px solid #990000;
+            background:#FFEBE8;
+            color:#262626;
+            &::placeholder {
+                color:#262626;
+            }
+        }
+    }
+
+.p-form__submit{
+        
+        display: block;
+        width: 100%;
+        // height: 60px;
+        margin-bottom: 20px;
+        background-color: #f89b9e;
+        background-image: linear-gradient(315deg, #f89b9e 0%, #c9d9ff 74%);
+        border: none;
+        font-size: 16px;
+        outline: none;
+        padding: 14px;
+        color: #fff;
+        border: 1px solid #fff;
+        transition: 0.2s;
+        border-radius: 5px;
+        &:hover{
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        & > a{
+            color: #fff;
+        }
+    }
+.p-form__txt{
+        text-align: left;
+        font-size: 12px;
+        &-link{
+            color:#D9B4B4;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+.p-form__errorMsg{
+        color: #990000;
+        margin-bottom: 20px;
+        display: block;
+        margin-top: -10px;
+    }
+.p-form__userImgContainer{
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.p-form__userAreaDrop{
+    position: relative;
+    display: block;
+    background-color: #f4f0e9;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+
+     & > img{
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+       
+     }
+}
+.p-form__SaunaAreaDrop{
+    position: relative;
+    display: block;
+    background-color: #f4f0e9;
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+
+    & > img{
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+       
+     }
+}
+.p-form__userIcon{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.p-form__inputLavel{
+    font-size: $font-size_14;
+}
+.p-form_inputOption{
+    font-size: $font-size_12;
+}
+.p-form__searchBox{
+    width: 100%;
+    max-width: 270px;
+}
