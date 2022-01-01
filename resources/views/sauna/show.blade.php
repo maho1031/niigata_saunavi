@@ -2,10 +2,16 @@
 
 
 @section('content')
-
+<div class="p-flashMessage">
+                    @if (session('flash_message'))
+                        <span class="alert alert-primary text-center js-flash" role="alert">
+                            {{ session('flash_message')}}
+                    </span>
+                    @endif
+                </div>
 <div class="l-page">
-    <div class="c-detailContainer u-mt150">
-        <div class="p-list u-mb60">
+    <div class="c-detailContainer u-mt60">
+        <div class="p-list u-mb80">
             <div class="p-listItem u-mb16">
                     <div class="p-listItem__header">
                         <div class="p-listItem__name">

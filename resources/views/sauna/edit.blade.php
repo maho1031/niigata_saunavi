@@ -84,7 +84,7 @@
                 @enderror
 
             <label for="" class="p-form__inputLavel">URL</label>
-                <input type="text" name="url" class="p-form__input @error('url') is-error @enderror" value="{{$sauna->url}}" required autocomplete="url" autofocus placeholder="http://niigata_saunavi.com">
+                <input type="text" name="url" class="p-form__input @error('url') is-error @enderror" value="{{$sauna->url}}" autocomplete="url" required autofocus placeholder="http://niigata_saunavi.com">
                 @error('url')
                     <span class="p-form__errorMsg" role="alert">
                         <strong>{{ $message }}</strong>
@@ -113,10 +113,10 @@
             <div class="p-form__userImgContainer u-mt16">
                 <label class="p-form__SaunaAreaDrop js-pic">
                     <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-                    <input type="file" class="p-form__userIcon js-input-file" name="pic1" value="{{ old('pic1', $sauna->pic1) }}" accept="image/jpeg,image/gif,image/png" />
+                    <input type="file" class="p-form__userIcon js-input-file" name="pic1" value="{{ old('pic1', $sauna->pic1) }}" accept="image/jpeg,image/gif,image/png" required/>
 
                     @if($sauna->pic1)
-                        <img src="{{asset('storage/uploads/' .$sauna->pic1)}}" alt="userIcon" class="js-prev">
+                        <img src="/storage/uploads/{{$sauna->pic1}}" alt="userIcon" class="js-prev">
                       
                         @else
                         <img src="{{asset('img/sample-img.jpg')}}" alt="sampleIcon" class="js-prev">

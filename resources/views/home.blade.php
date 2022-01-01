@@ -2,6 +2,12 @@
 @section('title', 'Top')
 
 @section('hero')
+ <!-- Loading -->
+ <div id="is-loading">
+        <div id="loading">
+            <img src="{{ asset('img/Spinner-3.gif') }}" alt="loadingImg" />
+        </div>
+    </div>
 <section class="p-hero">
     <div class="p-hero__content">
         

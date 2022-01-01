@@ -81,7 +81,7 @@
                 @enderror
 
             <label for="" class="p-form__inputLavel">URL</label>
-                <input type="text" name="url" class="p-form__input @error('url') is-error @enderror" value="{{old('url')}}" required autocomplete="url" autofocus placeholder="http://niigata_saunavi.com">
+                <input type="text" name="url" class="p-form__input @error('url') is-error @enderror" value="{{old('url')}}" autocomplete="url" autofocus placeholder="http://niigata_saunavi.com">
                 @error('url')
                     <span class="p-form__errorMsg" role="alert">
                         <strong>{{ $message }}</strong>

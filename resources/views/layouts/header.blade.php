@@ -18,7 +18,7 @@
                     </li>
                     @else
                     <li class="p-actionNav__link p-actionNav__link--button -login">
-                        <a href="/users/show/{{Auth::user()->id}}">マイページ</a>
+                        <a href="/users/show/">マイページ</a>
                     </li>
                     <li class="p-actionNav__link p-actionNav__link--button -regi">
                         <a href="{{route('logout')}}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -47,15 +47,15 @@
                    
                         <ul class="p-globalNav__links is-login">
                         @guest
-                            <li class="p-globalNav__link p-globalNav__link--button -login">
+                            <li class="p-actionNav__link  p-actionNav__link--button -login">
                                 <a href="{{route('login')}}">ログイン</a>
                             </li>
-                            <li class="p-globalNav__link p-globalNav__link--button -regi">
+                            <li class="p-actionNav__link p-actionNav__link--button -regi">
                                 <a href="{{route('register')}}">新規登録</a>
                             </li>
                             @else
                             <li class="p-actionNav__link p-actionNav__link--button -login">
-                                <a href="/users/show/{{Auth::user()->id}}}">マイページ</a>
+                                <a href="/users/show/">マイページ</a>
                             </li>
                             <li class="p-actionNav__link p-actionNav__link--button -regi">
                                 <a href="{{route('logout')}}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -98,7 +98,7 @@
                                 <a href="{{route('sauna.create')}}">施設新規登録</a>
                             </li>
                             <li class="p-globalNav__link">
-                                <a href="/users/withDrawal/{{Auth::user()->id}}">退会</a>
+                                <a href="/users/withDrawal">退会</a>
                             </li>
                             <li class="p-globalNav__link">
                                 <a href="">お問い合わせ</a>

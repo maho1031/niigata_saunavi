@@ -1,6 +1,12 @@
 @extends('layouts.app')
-
+ 
 @section('content')
+<!-- Loading -->
+<div id="is-loading">
+        <div id="loading">
+            <img src="{{ asset('img/Spinner-3.gif') }}" alt="loadingImg" />
+        </div>
+    </div>
 <div class="l-page u-mt80">
     <div class="c-listContainer">
         <div class="p-searchBox u-mt30">
@@ -86,7 +92,7 @@
                                     @endforeach
                                 </li>
                                 <li class="p-listItem__item u-mb16">
-                                    レビュー({{$sauna->reviews->count()}}件)
+                                    レビュー({{$sauna->reviews_count}}件)
                                 </li>
                             </ul>
                         </div>

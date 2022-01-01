@@ -100,6 +100,10 @@ class Sauna extends Model
         return Arr::get($holidays, $this->holiday_id);
 
     }
+    Public function scopeMostReviewSort($query)
+{
+    return $query->orderBy('reviews_count','desc');
+}
 
 
 }

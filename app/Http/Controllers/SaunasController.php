@@ -7,12 +7,14 @@ use App\Models\City;
 use App\Models\Sauna;
 use App\Models\Holiday;
 use App\Models\SaunaTag;
+use App\Models\SaunaReview;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use App\Http\Requests\StoreSauna;
-use App\Models\SaunaReview;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SaunasController extends Controller
 {
@@ -26,15 +28,36 @@ class SaunasController extends Controller
         $tagList = Tag::all();
         $cities = City::all();
 
+        // 渡ってきたパラメータをバリデーション
+        //  $request = (int)$request->all();
+        // $city_id = (int)$request->city_id;
+        // $tag_ids = (int)$request->tag_id;
+        // $sort_id = (int)$request->sort_id;
+        
+    //    dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'city_id' => 'integer|nullable',
+            'tag_ids' => 'integer|nullable',
+            'sort_id' => 'integer|nullable',
+        ]);
+        
+        if ($validator->fails()) {
+            // abort(400);
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        };
 
-        $city_id = $request->city_id;
+    
+        $city_id = $request->city_id; 
         $tag_ids = $request->tag_id;
         $sort_id = $request->sort_id;
 
-        
+        // dd($tag_ids);
     //    dd($sort_id);
          // 検索フォーム用
-         $query = Sauna::query();
+        //  $query = Sauna::query();
+         $query = Sauna::query()->withCount('reviews');
+
+         
 
         //  地域検索
          if(!empty($city_id)){
@@ -50,18 +73,25 @@ class SaunasController extends Controller
          
 
         //  並び替え
-         if($sort_id == 1 ){
-            $saunas = $query->withCount('reviews')->orderBy('reviews_count','desc')->orderBy('updated_at','desc')->paginate(10);
-            
-         }else{
-            $saunas = $query->orderBy('updated_at','desc')->paginate(10);
+        // if((Int)$sort_id === 1) {
+        //     $saunas = $query->mostReviewSort()->pagenate(10);
+
+        //  }else{
+        //     $saunas = $query->orderBy('updated_at','desc')->paginate(10);
+        //  }
+
+        if ((int)$sort_id === 1 ) {
+            $saunas = $query->mostReviewSort();
          }
+
+         $saunas = $query->orderBy('updated_at','desc')->paginate(10);
 
 
         //  dd($query);
 
         //  $tags = $saunas->tags->pluck('id')->toArray();
 
+        // dd($saunas);
 
         return view('sauna.index', compact('saunas', 'tagList', 'cities', 'city_id', 'tag_ids', 'sort_id'));
     }
@@ -117,6 +147,7 @@ class SaunasController extends Controller
 
             // 画像のサイズを変更
             $img = \Image::make($sauna_img);
+            // \InterventionImage
             $width = 500;
             $img->resize($width, null, function($constraint){
                 $constraint->aspectRatio();
@@ -144,7 +175,7 @@ class SaunasController extends Controller
         $sauna->tags()->attach(request()->tags);
 
 
-        return redirect('/')->with('flash_message', '新規登録が完了しました。');
+        return redirect()->route('user.show')->with('flash_message', '新規登録が完了しました。');
     }
 
     /**
@@ -186,6 +217,9 @@ class SaunasController extends Controller
         }
         
         $sauna = Sauna::find($sauna_id);
+        if($sauna->user_id !== auth()->id()){
+            abort(403);  //認証情報
+        }
         $cities = City::all();
         $holidays = Holiday::all();
         $tagList = Tag::all();
@@ -207,10 +241,16 @@ class SaunasController extends Controller
     {
          // GETパラメータが数字かどうかチェックする
          if(!ctype_digit($sauna_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+            return redirect('/');
+            // return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+            // abort(404);
         }
 
         $sauna = Sauna::find($sauna_id);
+
+        if($sauna->user_id !== auth()->id()){
+            abort(403);  //認証情報
+        }
 
         $sauna->fill($request->all());
 
@@ -251,7 +291,7 @@ class SaunasController extends Controller
 
 
 
-        return redirect('/')->with('flash_message', '編集が完了しました。');
+        return redirect()->route('user.show')->with('flash_message', '編集が完了しました。');
     }
 
     /**
@@ -264,41 +304,47 @@ class SaunasController extends Controller
     {
          // GETパラメータが数字かどうかチェックする
          if(!ctype_digit($sauna_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+            return redirect('/');
+            // return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+            // abort(404);
         }
 
         $sauna = Sauna::find($sauna_id);
+
+        if($sauna->user_id !== auth()->id()){
+            abort(403);  //認証情報
+        }
         // 中間テーブルの値を削除
         $sauna->tags()->detach();
         $sauna->delete();
         
 
-        return redirect('/')->with('flash_message', '1件削除しました。');
+        return redirect()->route('user.show')->with('flash_message', '1件削除しました。');
     }
 
-    public function search(Request $request){
+    // public function search(Request $request){
 
-        $tagList = Tag::all();
-        $cities = City::all();
+    //     $tagList = Tag::all();
+    //     $cities = City::all();
 
-        $city_id = $request->input('city_id');
-        $tag_id = [];
-        $tag_ids = $request->input('tag_id');
+    //     $city_id = $request->input('city_id');
+    //     $tag_id = [];
+    //     $tag_ids = $request->input('tag_id');
 
 
-         // 検索フォーム用
-         $query = DB::table('saunas');
+    //      // 検索フォーム用
+    //      $query = DB::table('saunas');
 
-         if(!empty($city_id)){
-                 $query->where('city_id', $city_id);
-         };
+    //      if(!empty($city_id)){
+    //              $query->where('city_id', $city_id);
+    //      };
 
-         $query->get();
-         $saunas = $query->paginate(10);
+    //      $query->get();
+    //      $saunas = $query->paginate(10);
  
          
-         return view('sauna.index', compact('saunas', 'tagList', 'cities'));
-    }
+    //      return view('sauna.index', compact('saunas', 'tagList', 'cities'));
+    // }
 
     public function review(Request $request){
         

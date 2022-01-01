@@ -26,20 +26,12 @@
 
 </head>
 <body>
-      <!-- Loading -->
-      <div id="is-loading">
-        <div id="loading">
-            <img src="{{ asset('img/Spinner-3.gif') }}" alt="loadingImg" />
-        </div>
-    </div>
-      <!-- フラッシュメッセージ -->
-        @if (session('flash_message'))
-                    <span class="alert alert-primary text-center js-flash" role="alert">
-                        {{ session('flash_message')}}
-                    </span>
-        @endif
+     
+   
+       
  
         @include('layouts.header')
+    
         @yield('hero')
         @yield('content')
         @include('layouts.footer')

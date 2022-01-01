@@ -14,7 +14,7 @@
             本当に退会しますか？
         </div>
 
-        <form action="{{ route('user.destroy',['user_id' => $user->id]) }}" method="POST" class="p-form u-mb120">
+        <form action="{{ route('user.destroy')}}" method="POST" class="p-form u-mb120">
                     @csrf
                     
                     <button type="submit" class="p-form__submit">

@@ -49,22 +49,26 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show()
     {
         // GETパラメータが数字かどうかチェックする
-        if(!ctype_digit($user_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
-        }
+        // if(!ctype_digit($user_id)){
+        //     return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+        // }
 
-        $user = Auth::user()->find($user_id);
-        $saunas = Auth::user()->saunas()->get();
+        // $user = Auth::user();
+        // // dd($user);
+        // $saunas = $user->saunas()->get();
 
-        // $reviews = Sauna::where('id', $sauna_id)->with('reviews.review_user')->get();
-        $reviews = User::where('id', $user_id)->with('user_reviews')->get();
+        // // $reviews = Sauna::where('id', $sauna_id)->with('reviews.review_user')->get();
+        // $reviews = User::where('id', $user_id)->with('user_reviews')->get();
 
         // dd($reviews);
 
-        return view('user.show',compact('user', 'saunas', 'reviews'));
+        // return view('user.show',compact('user', 'saunas', 'reviews'));
+        
+        return view('user.show');
+    
     }
 
     /**
@@ -73,16 +77,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user_id)
+    public function edit()
     {
         // GETパラメータが数字かどうかチェックする
-        if(!ctype_digit($user_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
-        }
+        // if(!ctype_digit($user_id)){
+        //     return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+        // }
 
-        $user = Auth::user()->find($user_id);
+        // $user = Auth::user()->find($user_id);
 
-        return view('user.edit', compact('user'));
+        // return view('user.edit', compact('user'));
+        return view('user.edit');
     }
 
     /**
@@ -92,14 +97,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, $user_id)
+    public function update(StoreUser $request)
     {
         // GETパラメータが数字かどうかチェックする
-        if(!ctype_digit($user_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
-        }
+        // if(!ctype_digit($user_id)){
+        //     return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+        // }
 
-        $user = Auth::user()->find($user_id);
+        $user = Auth::user();
 
         $user->fill($request->all())->save();
 
@@ -134,7 +139,7 @@ class UsersController extends Controller
 
         // dd($user_img, $request->prof_pic);
 
-        return redirect('/users/show/'.$request->id)->with('flash_message', 'プロフィールを更新しました！');
+        return redirect('/users/show/')->with('flash_message', 'プロフィールを更新しました！');
     }
 
     /**
@@ -143,28 +148,31 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function withDrawal($user_id)
+    public function withDrawal()
     {
         // GETパラメータが数字かどうかチェックする
-        if(!ctype_digit($user_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
-        }
-        $user = Auth::user()->find($user_id);
+        // if(!ctype_digit($user_id)){
+        //     return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+        // }
+        // $user = Auth::user();
 
-        return view('user.destroy',compact('user'));
+        return view('user.destroy');
+
+        // return view('user.destroy',compact('user'));
     }
 
-    public function destroy($user_id)
+    public function destroy()
     {
         // GETパラメータが数字かどうかチェックする
-        if(!ctype_digit($user_id)){
-            return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
-        }
-        
-        $user = Auth::user()->find($user_id);
+        // if(!ctype_digit($user_id)){
+        //     return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+        // }
+
+        $user = Auth::user();
         $user->delete();
 
 
-        return redirect('/')->with('flash_message', '退会申請が完了しました');;
+        return redirect('/');
+        // return redirect('/')->with('flash_message', '退会申請が完了しました');
     }
 }

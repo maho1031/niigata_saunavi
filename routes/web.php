@@ -30,15 +30,15 @@ Route::group(['middleware' => 'auth'], function() {
     // マイページ画面
     Route::get('/users', 'UsersController@index')->name('user.index');
     // ユーザー情報画面
-    Route::get('/users/show/{user_id}', 'UsersController@show')->name('user.show');
+    Route::get('/users/show', 'UsersController@show')->name('user.show');
     // ユーザー情報編集画面
-    Route::get('/users/edit/{user_id}', 'UsersController@edit')->name('user.edit');
+    Route::get('/users/edit', 'UsersController@edit')->name('user.edit');
     // ユーザー情報更新
-    Route::post('/users/update/{user_id}', 'UsersController@update')->name('user.update');
+    Route::post('/users/update', 'UsersController@update')->name('user.update');
     // ユーザー退会
-    Route::get('/users/withDrawal/{user_id}', 'UsersController@withDrawal')->name('user.withDraw');
+    Route::get('/users/withDrawal', 'UsersController@withDrawal')->name('user.withDraw');
 
-    Route::post('/users/destroy/{user_id}', 'UsersController@destroy')->name('user.destroy');
+    Route::post('/users/destroy', 'UsersController@destroy')->name('user.destroy');
 
 
     // サウナ一覧

@@ -14,7 +14,7 @@ class AddUrlToSaunas extends Migration
     public function up()
     {
         Schema::table('saunas', function (Blueprint $table) {
-            $table->text('url')->after('price');
+            $table->text('url')->after('price')->nullable();;
         });
     }
 

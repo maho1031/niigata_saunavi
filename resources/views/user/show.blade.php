@@ -3,23 +3,30 @@
 
 
 @section('content')
-<div class="c-container c-container__myPage u-mt120">
+<div class="p-flashMessage">
+                    @if (session('flash_message'))
+                        <span class="alert alert-primary text-center js-flash" role="alert">
+                            {{ session('flash_message')}}
+                    </span>
+                    @endif
+                </div>
+<div class="c-container c-container__myPage u-mt60">
     <div class="p-mypage">
         <div class="p-mypage__header">
             <div class="p-mypage__imgIcon">
-                @if($user->prof_pic)
-                    <img src="{{asset('storage/uploads/' .$user->prof_pic)}}" alt="userIcon" class="p-mypage__img">
-                      
+                @if(auth()->user()->prof_pic)
+                    <img src="{{asset('storage/uploads/' .auth()->user()->prof_pic)}}" alt="userIcon" class="p-mypage__img">
+
                 @else
                     <img src="{{asset('img/sample-img.jpg')}}" alt="sampleIcon" class="p-mypage__img">
                     @endif
             </div>
             <div class="p-mypage__container">
-                <h1 class="p-mypage__userName">{{$user->name}}</h1>
-                <a href="{{route('user.edit', ['user_id' => $user->id]) }}">プロフィール編集<i class="fas fa-pen p-mypage__fontIcon"></i></a>
+                <h1 class="p-mypage__userName">{{auth()->user()->name}}</h1>
+                <a href="{{route('user.edit')}}">プロフィール編集<i class="fas fa-pen p-mypage__fontIcon"></i></a>
             </div>
         </div>
-        <div class="p-mypage__content u-mt30">
+        <div class="p-mypage__content u-mt30 u-mb60">
             <div class="p-mypage__inner">
                 <div class="p-mypage__item">
                     <ul class="p-mypage__tabs">
@@ -27,9 +34,9 @@
                         <li class="p-mypage__tabBtn tabSauna js-tab-trigger" id="tab2">登録した施設<i class="fas fa-hot-tub p-mypage__fontIcon-tab"></i></li>
                     </ul>
 
-                    <div class="p-mypage__tabContents u-mb80">
+                    <div class="p-mypage__tabContents u-mb120">
                         <div class="p-mypage__tabContent js-tab-target is-show" id="tab1">
-                        @foreach($user->user_reviews as $review)
+                        @foreach(auth()->user()->user_reviews as $review)
                             <dl class="p-mypage__listLavel">
                                 <dd>投稿日：</dd>
                                 <dd>{{$review->created_at->format('Y-m-d')}}</dd>
@@ -42,7 +49,7 @@
                         </div>
 
                         <div class="p-mypage__tabContent js-tab-target" id="tab2">
-                            @foreach($saunas as $sauna)
+                            @foreach(auth()->user()->saunas as $sauna)
                             <!-- <div class="p-mypageContent"> -->
                             <dl  class="p-mypage__listLavel">
                                     <dd>投稿日：</dd>
@@ -50,7 +57,7 @@
                                 </dl>
                                 <dl class="p-mypage__listLavel2">
                                     <dd>施設：</dd>
-                                    <a href=""><dd>{{$sauna->name}}</dd></a>
+                                    <a href="/saunas/show/{{$sauna->id}}"><dd>{{$sauna->name}}</dd></a>
 
                                     
                                     <div class="p-mypage__link">

@@ -23,7 +23,7 @@ class CreateSaunasTable extends Migration
             $table->time('end_time');
             $table->bigInteger('price');
             $table->string('tag_checks')->nullable();
-            $table->string('pic1');
+            $table->string('pic1')->nullable();
             $table->string('pic2')->nullable();
             $table->string('pic3')->nullable();
             $table->timestamps();
